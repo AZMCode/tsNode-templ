@@ -1,0 +1,35 @@
+{
+  "name": "nodejs-ts-package-code-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "clean": "rm -rf dist/*",
+    "build": "npm run build-ts && npm run lint && npm run copy-static-assets",
+    "build-ts": "tsc",
+    "copy-static-assets": "ts-node copy-static-assets.ts",
+    "debug": "node --inspect-brk dist/index.js",
+    "lint": "echo \"Coming soon!\" && exit 1",
+    "test": "echo \"Coming soon!\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AZMCode/NodeJS-TS-Package-Code-Template.git"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/AZMCode/NodeJS-TS-Package-Code-Template/issues"
+  },
+  "homepage": "https://github.com/AZMCode/NodeJS-TS-Package-Code-Template#readme",
+  "dependencies": {
+    "typescript": "^3.8.3"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.27.0",
+    "@typescript-eslint/parser": "^2.27.0",
+    "eslint": "^6.8.0",
+    "ts-node": "^8.8.2"
+  }
+}
