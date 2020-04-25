@@ -1,9 +1,9 @@
 {
-	"extends": "tsconfig.json",
-	"compilerOptions": {
-		"inlineSourceMap": true,
-		"inlineSources": true,
-		"declarationMap": true,
-		"removeComments": false,
-	}
+  "extends": "tsconfig.json",
+  "compilerOptions": {
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "declarationMap": true,
+    "removeComments": false,
+  }
 }

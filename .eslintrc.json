@@ -7,7 +7,7 @@
     "extends": [
         "eslint:all",
         "plugin:@typescript-eslint/eslint-all",
-		"plugin:@typescript-eslint/all"
+    "plugin:@typescript-eslint/all"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -27,7 +27,7 @@
         "no-template-curly-in-string": "warn",
         "accessor-pairs": [
             "error",
-	    {
+      {
                 "setWithoutGet": true,
                 "getWithoutSet": true,
                 "enforceForClassMembers": true
@@ -131,42 +131,42 @@
         "space-in-parens": "off",
         "space-unary-ops": ["error", {"words": true, "nonwords": false}],
         "wrap-regex": "off",
-		"arrow-spacing": ["error", {"before": false, "after": false}],
-		"generator-star-spacing": ["error", {"before": false, "after": true}],
-		"prefer-destructuring": "warning",
-		"yield-star-spacing": ["error","after"],
+    "arrow-spacing": ["error", {"before": false, "after": false}],
+    "generator-star-spacing": ["error", {"before": false, "after": true}],
+    "prefer-destructuring": "warning",
+    "yield-star-spacing": ["error","after"],
 
 
-		"@typescript-eslint/array-type": ["error","generic"],
-		"@typescript-eslint/ban-ts-comment": ["error", {
-  			"ts-expect-error": false,
-  			"ts-ignore": true,
-  			"ts-nocheck": true,
-  			"ts-check": false,
-  		}],
-		"@typescript-eslint/consistent-type-definitions": "off",
-		"@typescript-eslint/explicit-function-return-type": ["error",{
-			"allowExpressions": false,
-			"allowTypedFunctionExpressions": false,
-			"allowHigherOrderFunctions": false,
-			"allowConciseArrowFunctionExpressionsStartingWithVoid": false
-		}],
-		"@typescript-eslint/member-delimiter-style":["error",{
-		    "multiline": {
-		        "delimiter": "comma",
-		        "requireLast": false
-		    },
-		    "singleline": {
-		        "delimiter": "comma",
-		        "requireLast": false
-		    }
-		}],
-		"@typescript-eslint/no-inferrable-types": ["error",{
-			"ignoreParameters": true,
-			"ignoreProperties": true,
-		}],
-		"@typescript-eslint/no-unnecesary-type-arguments": "warn",
-		"@typescript-eslint/no-unused-vars-experimental": "warn",
-		"@typescript-eslint/prefer-function-type": "off"
+    "@typescript-eslint/array-type": ["error","generic"],
+    "@typescript-eslint/ban-ts-comment": ["error", {
+        "ts-expect-error": false,
+        "ts-ignore": true,
+        "ts-nocheck": true,
+        "ts-check": false,
+      }],
+    "@typescript-eslint/consistent-type-definitions": "off",
+    "@typescript-eslint/explicit-function-return-type": ["error",{
+      "allowExpressions": false,
+      "allowTypedFunctionExpressions": false,
+      "allowHigherOrderFunctions": false,
+      "allowConciseArrowFunctionExpressionsStartingWithVoid": false
+    }],
+    "@typescript-eslint/member-delimiter-style":["error",{
+        "multiline": {
+            "delimiter": "comma",
+            "requireLast": false
+        },
+        "singleline": {
+            "delimiter": "comma",
+            "requireLast": false
+        }
+    }],
+    "@typescript-eslint/no-inferrable-types": ["error",{
+      "ignoreParameters": true,
+      "ignoreProperties": true,
+    }],
+    "@typescript-eslint/no-unnecesary-type-arguments": "warn",
+    "@typescript-eslint/no-unused-vars-experimental": "warn",
+    "@typescript-eslint/prefer-function-type": "off"
     }
 }
