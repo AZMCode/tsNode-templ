@@ -2,9 +2,9 @@
 Short phrase to head the README explaining your project
 ## Table Of Contents
 * [Introduction](#Introduction)
-* [Project Organization / Wiki link](#Project%20Organization%20/%20Wiki%20link)
-* [How to install](#How%20to%20install)
-* [How to use](#How%20to%20Use)
+* [Project Organization / Wiki link](#Project-Organization-/-Wiki-link)
+* [How to install](#How-to-install)
+* [How to use](#How-to-Use)
 
 ### Introduction
 * What this project is for, and how it can be used
