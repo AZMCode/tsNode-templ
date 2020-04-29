@@ -3,7 +3,6 @@
     "module": "CommonJS",
     "esModuleInterop": true,
     "target": "ES3",
-    "incremental": true,
     "newLine": "lf",
     "strict": true,
     "strictBindCallApply": true,

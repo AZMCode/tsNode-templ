@@ -1,8 +1,10 @@
 {
-  "extends": "tsconfig.json",
+  "extends": "./tsconfig.json",
   "compilerOptions": {
+    "incremental": true,
     "inlineSourceMap": true,
     "inlineSources": true,
+    "declaration": true,
     "declarationMap": true,
     "removeComments": false,
   }
