@@ -1,0 +1,18 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+  ],
+  "ignorePatterns": [
+	  "*.test.*"
+  ],
+  "ext": [
+	"ts",
+	"tsx"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+  ],
+}

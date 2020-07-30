@@ -1,0 +1,11 @@
+{
+  "inputFiles": ["./src"],
+  "exclude": ["*.test.*"],
+  "media": "docs/Static",
+  "theme": "docusaurus2",
+  "includeVersion": true,
+  "readme": "README.md",
+  "plugin": "none",
+  "mode": "modules",
+  "out": "docs/HTML"
+}

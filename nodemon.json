@@ -1,0 +1,12 @@
+{
+  "verbose": true,
+  "watch": [
+	"src"
+  ],
+  "ignore": [
+	"*.test.*"
+  ],
+  "execMap": {
+    "yarn": "yarn run build-all"
+  }
+}

@@ -1,0 +1,11 @@
+{
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"sourceMap": false,
+		"preserveConstEnums": false,
+		"incremental": false
+	},
+	"exclude": [
+		"src/**/*.test.*"
+	]
+}
