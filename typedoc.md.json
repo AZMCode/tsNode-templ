@@ -2,7 +2,7 @@
   "inputFiles": ["./src","./*.md"],
   "exclude": ["./**/*.test.*"],
   "media": "docs/Static",
-  "theme": "docusaurus2",
+  "theme": "markdown",
   "includeVersion": true,
   "readme": "README.md",
   "plugin": "typedoc-plugin-markdown",
