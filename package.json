@@ -4,8 +4,8 @@
   "description": "AZMMine's template for a Typescript NodeJS package",
   "main": "dist/main.js",
   "repository": "git@github.com:AZMCode/NodeJS-TS-Package-Code-Template.git",
-  "author": "AZMCode <15837568+AZMCode@users.noreply.github.com>",
-  "license": "UNLICENSED",
+  "author": "AZMCode <adrianozambrana@protonmail.com>",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "start": "node dist/main.js",
