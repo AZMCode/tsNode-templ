@@ -14,7 +14,7 @@
     "watch:debug-brk": "nodemon --config nodemon.json --exec 'yarn run build:code-fast && yarn run debug-brk'",
     "watch:docs": "$INIT_CWD/devScripts/watchDocs.sh",
     "clean": "$INIT_CWD/devScripts/cleanDir.sh dist && $INIT_CWD/devScripts/cleanDir.sh docs/HTML && $INIT_CWD/devScripts/cleanDir.sh docs/Markdown && rm -rf $INIT_CWD/coverage",
-    "purge": "yarn run clean:all && rm -rf node_modules",
+    "purge": "yarn run clean && rm -rf node_modules",
     "test": "jest --collectCoverage --config jest.config.json dist",
     "test-fast": "jest --config jest.config.json dist",
     "lint": "eslint -c eslint.json --ext .ts,.tsx src",
