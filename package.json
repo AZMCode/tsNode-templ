@@ -13,7 +13,7 @@
     "watch:debug": "nodemon --config nodemon.json --exec 'yarn run build:code-fast && yarn run debug'",
     "watch:debug-brk": "nodemon --config nodemon.json --exec 'yarn run build:code-fast && yarn run debug-brk'",
     "watch:docs": "./devScripts/watchDocs.sh",
-    "clean": "./devScripts/cleanDir.sh dist && ./devScripts/cleanDir.sh docs/HTML && ./devScripts/cleanDir.sh docs/Markdown",
+    "clean": "./devScripts/cleanDir.sh dist && ./devScripts/cleanDir.sh docs/HTML && ./devScripts/cleanDir.sh docs/Markdown && rm -rf coverage",
     "purge": "yarn run clean:all && rm -rf node_modules",
     "test": "jest --collectCoverage --config jest.config.json dist",
     "test-fast": "jest --config jest.config.json dist",
