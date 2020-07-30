@@ -2,6 +2,7 @@
 	"extends": "./tsconfig.json",
 	"compilerOptions": {
 		"sourceMap": false,
+		"declarationMap": false,
 		"preserveConstEnums": false,
 		"incremental": false
 	},

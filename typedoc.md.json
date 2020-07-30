@@ -1,11 +1,12 @@
 {
-  "inputFiles": ["./src"],
-  "exclude": ["*.test.*"],
+  "inputFiles": ["./src","./*.md"],
+  "exclude": ["./**/*.test.*"],
   "media": "docs/Static",
   "theme": "docusaurus2",
   "includeVersion": true,
   "readme": "README.md",
   "plugin": "typedoc-plugin-markdown",
   "mode": "modules",
-  "out": "docs/Markdown"
+  "out": "docs/Markdown",
+  "disableOutputCheck": true
 }

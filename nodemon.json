@@ -1,12 +1,11 @@
 {
   "verbose": true,
   "watch": [
-	"src"
+	"src/**/*",
+	"./*.md"
   ],
   "ignore": [
-	"*.test.*"
+	"./**/*.test.*"
   ],
-  "execMap": {
-    "yarn": "yarn run build-all"
-  }
+  "ext": "ts tsx md"
 }

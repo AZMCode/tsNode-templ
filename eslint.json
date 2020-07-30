@@ -2,17 +2,13 @@
   "root": true,
   "parser": "@typescript-eslint/parser",
   "plugins": [
-    "@typescript-eslint",
+    "@typescript-eslint"
   ],
   "ignorePatterns": [
 	  "*.test.*"
   ],
-  "ext": [
-	"ts",
-	"tsx"
-  ],
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-  ],
+    "plugin:@typescript-eslint/recommended"
+  ]
 }

@@ -1,11 +1,12 @@
 {
-  "inputFiles": ["./src"],
-  "exclude": ["*.test.*"],
+  "inputFiles": ["./src","./*.md"],
+  "exclude": ["./**/*.test.*"],
   "media": "docs/Static",
-  "theme": "docusaurus2",
+  "theme": "minimal",
   "includeVersion": true,
   "readme": "README.md",
   "plugin": "none",
   "mode": "modules",
-  "out": "docs/HTML"
+  "out": "docs/HTML",
+  "disableOutputCheck": true
 }

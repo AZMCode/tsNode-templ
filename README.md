@@ -1,2 +1,2 @@
 # Template Package
-Please fill out :D
+This is the introduction to the new NPM module and its function.
