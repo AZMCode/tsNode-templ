@@ -42,7 +42,7 @@ jobs:
       run: yarn install
     
     - name: Build and Test
-      run: yarn run build:all-rel
+      run: cd $GITHUB_WORKSPACE && yarn run build:all-rel
     
     - name: Publish Docs to Wiki
       uses: Andrew-Chen-Wang/github-wiki-action@v2
@@ -77,7 +77,7 @@ jobs:
         prerelease: false
     
     - name: Pack Package
-      run: yarn pack --filename "${{steps.packageInfo.outputs.package-name}}-${{steps.packageInfo.outputs.package-version}}.tgz"
+      run: cd $GITHUB_WORKSPACE && yarn pack --filename "${{steps.packageInfo.outputs.package-name}}-${{steps.packageInfo.outputs.package-version}}.tgz"
     
     - name: Upload Package to Release
       uses: actions/upload-release-asset@v1.0.2
@@ -85,7 +85,7 @@ jobs:
         # The URL for uploading assets to the release
         upload_url: ${{steps.releaseCreate.outputs.upload_url}}
         # The path to the asset you want to upload
-        asset_path: "${{steps.packageInfo.outputs.package-name}}-${{steps.packageInfo.outputs.package-version}}.tgz"
+        asset_path: "$GITHUB_WORKSPACE/${{steps.packageInfo.outputs.package-name}}-${{steps.packageInfo.outputs.package-version}}.tgz"
         asset_name: "NPM-Package-${{steps.packageInfo.outputs.package-name}}-${{steps.packageInfo.outputs.package-version}}.tgz"
         # The content-type of the asset you want to upload. See the supported Media Types here: https://www.iana.org/assignments/media-types/media-types.xhtml for more information
         asset_content_type: application/x-compressed-tar
