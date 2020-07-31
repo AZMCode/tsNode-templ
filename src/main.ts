@@ -1,7 +1,9 @@
 /**
- * This is the doc comment for main.ts. This should probably include the main purpose of the program.
- * @packageDocumentation
+ *
+ * This is the description for a test function
+ * @param  {string} input Mock input string
+ * @return       Mock return value
  */
-
-console.log("Template Running!");
-console.log("IDK what to put here");
+export function TestFunction(input:string):string{
+	return input
+}

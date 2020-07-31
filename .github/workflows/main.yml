@@ -9,14 +9,14 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - name: Checkout Commit
       uses: actions/checkout@v2
-    
+
     - name: Parsing Package Info
       id: packageInfo
       run: |
         echo "::set-output name=package-name::$(jq -r .name package.json)"
         echo "::set-output name=package-version::$(jq -r .version package.json)"
         echo "::set-output name=commit-msg::$(git log -1 --pretty=%B)"
-    
+
 
     - name: Setup Node.js environment
       uses: actions/setup-node@v2.1.1
@@ -40,7 +40,7 @@ jobs:
 
     - name: Build and Test
       run: cd $GITHUB_WORKSPACE && yarn run build:all
-      
+
   BuildAndRelease:
     if: ${{ github.ref }} == "master" && ${{ github.event_name }} == "push"
     # The type of runner that the job will run on
@@ -57,7 +57,7 @@ jobs:
         echo "::set-output name=package-name::$(jq -r .name package.json)"
         echo "::set-output name=package-version::$(jq -r .version package.json)"
         echo "::set-output name=commit-msg::$(git log -1 --pretty=%B)"
-    
+
     - name: Setup Node.js environment
       uses: actions/setup-node@v2.1.1
       with:
@@ -81,22 +81,15 @@ jobs:
     - name: Build
       run: cd $GITHUB_WORKSPACE && yarn run build:all-rel
 
-    - name: Publish Docs to Wiki
+    - name: Publish Docs to pages-gh
       continue-on-error: true
-      uses: Andrew-Chen-Wang/github-wiki-action@v2
+      uses: JamesIves/github-pages-deploy-action@3.5.9
       with:
-        WIKI_DIR: $GITHUB_WORKSPACE/docs/Markdown/ 
-      env:
-        # Directory to rsync files to the wiki.
-        WIKI_DIR: ${{ github.workspace }}/docs/Markdown/
-        # The GitHub Token for this action to use. Specify secrets.GITHUB_TOKEN.
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GH_MAIL: adrianozambrana@protonmail.com
-        GH_NAME: ${{ github.repository_owner }}
-        REPO: ${{ github.repository }} 
-        EXCLUDED_FILES: .gitignore
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: gh-pages # The branch the action should deploy to.
+        FOLDER: docs/HTML # The folder the action should deploy.
 
-    
+
 
     - name: Create Release
       id: releaseCreate

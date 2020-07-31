@@ -1,14 +1,14 @@
 {
     "compilerOptions": {
-        "module": "UMD",
+    "module": "UMD",
 		"esModuleInterop": true,
 		"moduleResolution": "node",
 		"target": "ES3",
 		"noImplicitAny": true,
 		"noImplicitReturns": true,
-        "removeComments": true,
-        "preserveConstEnums": true,
-        "sourceMap": true,
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "sourceMap": true,
 		"alwaysStrict": true,
 		"declaration": true,
 		"declarationMap": true,

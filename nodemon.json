@@ -2,7 +2,8 @@
   "verbose": true,
   "watch": [
 	"src/**/*",
-	"./*.md"
+	"docs/Static/**/*",
+  "docs/Source/**/*"
   ],
   "ignore": [
 	"./**/*.test.*"
