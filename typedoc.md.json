@@ -3,6 +3,7 @@
   "exclude": ["./**/*.test.*"],
   "media": "docs/Static",
   "theme": "markdown",
+  "namedAnchors": true,
   "includeVersion": true,
   "readme": "README.md",
   "plugin": "typedoc-plugin-markdown",
