@@ -87,7 +87,7 @@ jobs:
         WIKI_DIR: $GITHUB_WORKSPACE/docs/Markdown/ 
       env:
         # Directory to rsync files to the wiki.
-        WIKI_DIR: $GITHUB_WORKSPACE/docs/Markdown/
+        WIKI_DIR: ${{ github.workspace }}/docs/Markdown/
         # The GitHub Token for this action to use. Specify secrets.GITHUB_TOKEN.
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GH_MAIL: adrianozambrana@protonmail.com
@@ -124,7 +124,7 @@ jobs:
         # The URL for uploading assets to the release
         upload_url: ${{steps.releaseCreate.outputs.upload_url}}
         # The path to the asset you want to upload
-        asset_path: "$GITHUB_WORKSPACE/${{steps.packageInfo.outputs.package-name}}-${{steps.packageInfo.outputs.package-version}}.tgz"
-        asset_name: "NPM-Package-${{steps.packageInfo.outputs.package-name}}-${{steps.packageInfo.outputs.package-version}}.tgz"
+        asset_path: ${{github.workspace}}/${{steps.packageInfo.outputs.package-name}}-${{steps.packageInfo.outputs.package-version}}.tgz
+        asset_name: NPM-Package-${{steps.packageInfo.outputs.package-name}}-${{steps.packageInfo.outputs.package-version}}.tgz
         # The content-type of the asset you want to upload. See the supported Media Types here: https://www.iana.org/assignments/media-types/media-types.xhtml for more information
         asset_content_type: application/x-compressed-tar
