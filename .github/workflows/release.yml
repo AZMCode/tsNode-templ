@@ -38,6 +38,8 @@ jobs:
 
     - name: Publish Docs to Wiki
       uses: Andrew-Chen-Wang/github-wiki-action@v2
+      with:
+        WIKI_DIR: $GITHUB_WORKSPACE/docs/Markdown/ 
       env:
         # Directory to rsync files to the wiki.
         WIKI_DIR: $GITHUB_WORKSPACE/docs/Markdown/
