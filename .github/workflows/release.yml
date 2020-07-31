@@ -1,22 +1,42 @@
 name: CI Publish
 
-on:
-  push:
-    branch: [ master ]
+on: [push, pull_request]
 jobs:
-  BuildAndRelease:
-    # The type of runner that the job will run on
+  BuildAndTest:
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - name: Checkout Commit
       uses: actions/checkout@v2
+    
+    - name: Parsing Package Info
+      id: packageInfo
+      run: |
+        echo "::set-output name=package-name::$(jq -r .name package.json)"
+        echo "::set-output name=package-version::$(jq -r .version package.json)"
+        echo "::set-output name=commit-msg::commitMsg=$(git log -1 --pretty=%B)"
+    
+    - name: Cache
+      id: firstCacheTest
+      uses: actions/cache@v2.1.0
+      with:
+        # A list of files, directories, and wildcard patterns to cache and restore
+        path: |
+          $GITHUB_WORKSPACE/dist/**/*
+          $GITHUB_WORKSPACE/src/**/*
+          $GITHUB_WORKSPACE/docs/**/*
+          $GITHUB_WORKSPACE/devScripts/**/*
+          $GITHUB_WORKSPACE/static/**/*
+          $GITHUB_WORKSPACE/*.json
+          $GITHUB_WORKSPACE/*.md
+          $GITHUB_WORKSPACE/*.lock
+        # An explicit key for restoring and saving the cache
+        key: ${{ github.SHA }}
 
     - name: Setup Node.js environment
+      if: ${{ !steps.firstCacheTest.output.cache-hit }}
       uses: actions/setup-node@v2.1.1
-NodeJS-TS-Package-Code-Template/.github/workflows/
-
       with:
         # Set always-auth in npmrc
         always-auth: false
@@ -30,10 +50,109 @@ NodeJS-TS-Package-Code-Template/.github/workflows/
         scope: false
 
     - name: Setup Yarn
+      if: ${{ !steps.firstCacheTest.output.cache-hit }}
       run: npm install -g yarn && cd $GITHUB_WORKSPACE
 
     - name: Install Dependencies
+      if: ${{ !steps.firstCacheTest.output.cache-hit }}
       run: yarn install
+      
+    - name: Cache
+      uses: actions/cache@v2.1.0
+      with:
+        # A list of files, directories, and wildcard patterns to cache and restore
+        path: |
+          $GITHUB_WORKSPACE/dist/**/*
+          $GITHUB_WORKSPACE/src/**/*
+          $GITHUB_WORKSPACE/docs/**/*
+          $GITHUB_WORKSPACE/devScripts/**/*
+          $GITHUB_WORKSPACE/static/**/*
+          $GITHUB_WORKSPACE/*.json
+          $GITHUB_WORKSPACE/*.md
+          $GITHUB_WORKSPACE/*.lock
+        # An explicit key for restoring and saving the cache
+        key: ${{ github.SHA }}
+
+
+    - name: Build and Test
+      run: cd $GITHUB_WORKSPACE && yarn run build:all
+      
+  BuildAndRelease:
+    if: ${{ github.ref === master }}
+    needs: BuildAndTest
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - name: Checkout Commit
+      uses: actions/checkout@v2
+
+    - name: Parsing Package Info
+      id: packageInfo
+      run: |
+        echo "::set-output name=package-name::$(jq -r .name package.json)"
+        echo "::set-output name=package-version::$(jq -r .version package.json)"
+        echo "::set-output name=commit-msg::commitMsg=$(git log -1 --pretty=%B)"
+    
+    - name: Cache
+      id: firstCacheRelease
+      uses: actions/cache@v2.1.0
+      with:
+        # A list of files, directories, and wildcard patterns to cache and restore
+        path: |
+          $GITHUB_WORKSPACE/dist/**/*
+          $GITHUB_WORKSPACE/src/**/*
+          $GITHUB_WORKSPACE/docs/**/*
+          $GITHUB_WORKSPACE/devScripts/**/*
+          $GITHUB_WORKSPACE/static/**/*
+          $GITHUB_WORKSPACE/*.json
+          $GITHUB_WORKSPACE/*.md
+          $GITHUB_WORKSPACE/*.lock
+        # An explicit key for restoring and saving the cache
+        key: ${{ github.SHA }}
+    
+    - name: Setup Node.js environment
+      if: ${{ !steps.firstCacheRelease.output.cache-hit }}
+      uses: actions/setup-node@v2.1.1
+      with:
+        # Set always-auth in npmrc
+        always-auth: false
+        # Version Spec of the version to use.  Examples: 12.x, 10.15.1, >=10.15.0
+        node-version: 12.x
+        # Set this option if you want the action to check for the latest available version that satisfies the version spec
+        check-latest: true
+        # Optional registry to set up for auth. Will set the registry in a project level .npmrc and .yarnrc file, and set up auth to read in from env.NODE_AUTH_TOKEN
+        registry-url: false
+        # Optional scope for authenticating against scoped registries
+        scope: false
+
+    - name: Setup Yarn
+      if: ${{ !steps.firstCacheRelease.output.cache-hit }}
+      run: npm install -g yarn && cd $GITHUB_WORKSPACE
+
+    - name: Install Dependencies
+      if: ${{ !steps.firstCacheRelease.output.cache-hit }}
+      run: yarn install
+
+    
+        
+    - name: Cache
+      if: ${{ !steps.firstCacheRelease.output.cache-hit }}
+      uses: actions/cache@v2.1.0
+      with:
+        # A list of files, directories, and wildcard patterns to cache and restore
+        path: |
+          $GITHUB_WORKSPACE/dist/**/*
+          $GITHUB_WORKSPACE/src/**/*
+          $GITHUB_WORKSPACE/docs/**/*
+          $GITHUB_WORKSPACE/devScripts/**/*
+          $GITHUB_WORKSPACE/static/**/*
+          $GITHUB_WORKSPACE/*.json
+          $GITHUB_WORKSPACE/*.md
+          $GITHUB_WORKSPACE/*.lock
+        # An explicit key for restoring and saving the cache
+        key: ${{ github.SHA }}
 
     - name: Build
       run: cd $GITHUB_WORKSPACE && yarn run build:all-rel
@@ -51,12 +170,7 @@ NodeJS-TS-Package-Code-Template/.github/workflows/
         GH_NAME: ${{ github.repository_owner }}
         REPO: ${{ github.repository }} 
 
-    - name: Parsing Package Name
-      id: packageInfo
-      run: |
-        echo "::set-output name=package-name::$(jq -r .name package.json)"
-        echo "::set-output name=package-version::$(jq -r .version package.json)"
-        echo "::set-output name=commit-msg::commitMsg=$(git log -1 --pretty=%B)"
+    
 
     - name: Create Release
       id: releaseCreate
