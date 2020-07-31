@@ -83,7 +83,7 @@ jobs:
     - name: Build
       run: cd $GITHUB_WORKSPACE && yarn run build:all-rel
       
-    - run: rm docs/HTML/.gitignore
+    - run: rm -f $GITHUB_WORKSPACE/docs/HTML/.gitignore
 
     - name: Publish Docs to GH Pages
       continue-on-error: true
