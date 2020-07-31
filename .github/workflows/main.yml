@@ -3,7 +3,7 @@ name: CI
 on: [push, pull_request]
 jobs:
   BuildAndTest:
-    if: {{ github.ref }} != "gh-pages"
+    if: ${{ github.ref }} != "gh-pages"
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
