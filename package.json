@@ -29,7 +29,7 @@
     "build:code": "yarn run clean:code && yarn run lint && yarn run build:ts && yarn run test",
     "build:code-rel": "yarn run clean:code && yarn run lint && yarn run build:ts-rel",
     "build:all": "yarn run build:code && yarn run build:docs",
-    "build:all-rel": "yarn run build:code-rel && yarn run build:docs-all",
+    "build:all-rel": "yarn run build:code-rel && yarn run build:docs",
     "bStart": "yarn run build-all && yarn run start"
   },
   "files": [
