@@ -1,13 +1,10 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: CI Testing
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
-on:
-  push:
-    branches: [ master ]
-  pull_request:
+on:[push, pull_request]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -40,83 +37,5 @@ jobs:
     - name: Install Dependencies
       run: yarn install
 
-    - name: Build
+    - name: Build and Test
       run: cd $GITHUB_WORKSPACE && yarn run build:all
-  BuildAndRelease:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - name: Checkout Commit
-      uses: actions/checkout@v2
-
-    - name: Setup Node.js environment
-      uses: actions/setup-node@v2.1.1
-      with:
-        # Set always-auth in npmrc
-        always-auth: false
-        # Version Spec of the version to use.  Examples: 12.x, 10.15.1, >=10.15.0
-        node-version: 12.x
-        # Set this option if you want the action to check for the latest available version that satisfies the version spec
-        check-latest: true
-        # Optional registry to set up for auth. Will set the registry in a project level .npmrc and .yarnrc file, and set up auth to read in from env.NODE_AUTH_TOKEN
-        registry-url: false
-        # Optional scope for authenticating against scoped registries
-        scope: false
-
-    - name: Setup Yarn
-      run: npm install -g yarn && cd $GITHUB_WORKSPACE
-
-    - name: Install Dependencies
-      run: yarn install
-
-    - name: Build
-      run: cd $GITHUB_WORKSPACE && yarn run build:all-rel
-
-    - name: Publish Docs to Wiki
-      uses: Andrew-Chen-Wang/github-wiki-action@v2
-      with:
-        # Directory to rsync files to the wiki.
-        WIKI_DIR: $docs/Markdown
-        # The GitHub Token for this action to use. Specify secrets.GITHUB_TOKEN.
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GH_MAIL: adrianozambrana@protonmail.com
-        GH_NAME: AZMCode
-
-    - name: Parsing Package Name
-      id: packageInfo
-      run: |
-        echo "::set-output name=package-name::$(jq -r .name package.json)"
-        echo "::set-output name=package-version::$(jq -r .version package.json)"
-        echo "::set-output name=commit-msg::commitMsg="$(git log -1 --pretty=%B)"
-
-    - name: Create Release
-      id: releaseCreate
-      uses: actions/create-release@v1
-      with:
-        # The name of the tag. This should come from the webhook payload, `github.GITHUB_REF` when a user pushes a new tag
-        tag_name: ${{ github.GITHUB_REF }}
-        # The name of the release. For example, `Release v1.0.1`
-        release_name: ${{join('v', steps.packageInfo.outputs.commit-msg)}}
-        # Text describing the contents of the tag.
-        body: $commitMsg
-        # `true` to create a draft (unpublished) release, `false` to create a published one. Default: `false`
-        draft: false
-        # `true` to identify the release as a prerelease. `false` to identify the release as a full release. Default: `false`
-        prerelease: false
-
-    - name: Pack Package
-      run: cd $GITHUB_WORKSPACE && yarn pack --filename "${{steps.packageInfo.outputs.package-name}}-${{steps.packageInfo.outputs.package-version}}.tgz"
-
-    - name: Upload Package to Release
-      uses: actions/upload-release-asset@v1.0.2
-      with:
-        # The URL for uploading assets to the release
-        upload_url: ${{steps.releaseCreate.outputs.upload_url}}
-        # The path to the asset you want to upload
-        asset_path: "$GITHUB_WORKSPACE/${{steps.packageInfo.outputs.package-name}}-${{steps.packageInfo.outputs.package-version}}.tgz"
-        asset_name: "NPM-Package-${{steps.packageInfo.outputs.package-name}}-${{steps.packageInfo.outputs.package-version}}.tgz"
-        # The content-type of the asset you want to upload. See the supported Media Types here: https://www.iana.org/assignments/media-types/media-types.xhtml for more information
-        asset_content_type: application/x-compressed-tar
