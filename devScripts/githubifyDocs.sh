@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 #Shamelessly stolen from msspshaw at https://github.com/tgreyuk/typedoc-plugin-markdown/issues/47#issuecomment-508257371
 
+cd docs/Markdown
+
 originalPaths=`find  . -mindepth 2 -type f`
 find  . -mindepth 2 -type f -exec mv {} . \;
 find . -type d -empty -delete
@@ -16,4 +18,4 @@ done <<< "$originalPaths"
 # Strip out .md from raw text to support Github Wiki
 find ./ -type f -exec sed -i '' -e 's/\.md//g' {} \;
 
-
+cd ../..
