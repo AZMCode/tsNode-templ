@@ -56,7 +56,7 @@ jobs:
       run: |
         echo "::set-output name=package-name::$(jq -r .name package.json)"
         echo "::set-output name=package-version::$(jq -r .version package.json)"
-        echo "::set-output name=commit-msg::commitMsg=$(git log -1 --pretty=%B)"
+        echo "::set-output name=commit-msg::$(git log -1 --pretty=%B)"
     
     - name: Setup Node.js environment
       uses: actions/setup-node@v2.1.1
@@ -82,6 +82,7 @@ jobs:
       run: cd $GITHUB_WORKSPACE && yarn run build:all-rel
 
     - name: Publish Docs to Wiki
+      continue-on-error: true
       uses: Andrew-Chen-Wang/github-wiki-action@v2
       with:
         WIKI_DIR: $GITHUB_WORKSPACE/docs/Markdown/ 
@@ -93,11 +94,13 @@ jobs:
         GH_MAIL: adrianozambrana@protonmail.com
         GH_NAME: ${{ github.repository_owner }}
         REPO: ${{ github.repository }} 
+        EXCLUDED_FILES: .gitignore
 
     
 
     - name: Create Release
       id: releaseCreate
+      continue-on-error: true
       uses: actions/create-release@v1
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -117,6 +120,7 @@ jobs:
       run: cd $GITHUB_WORKSPACE && yarn pack --filename "${{steps.packageInfo.outputs.package-name}}-${{steps.packageInfo.outputs.package-version}}.tgz"
 
     - name: Upload Package to Release
+      continue-on-error: true
       uses: actions/upload-release-asset@v1.0.2
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
