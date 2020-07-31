@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 #Shamelessly stolen from msspshaw at https://github.com/tgreyuk/typedoc-plugin-markdown/issues/47#issuecomment-508257371
 # Flatten docs structure
 cd docs/Markdown
