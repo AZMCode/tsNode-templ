@@ -82,7 +82,7 @@ jobs:
     - name: Build
       run: cd $GITHUB_WORKSPACE && yarn run build:all-rel
 
-    - name: Publish Docs to pages-gh
+    - name: Publish Docs to GH Pages
       continue-on-error: true
       uses: JamesIves/github-pages-deploy-action@3.5.9
       with:
