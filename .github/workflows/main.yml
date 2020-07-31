@@ -85,6 +85,9 @@ jobs:
       
     - name: Delete .gitignore file in HTML Docs
       run: rm $GITHUB_WORKSPACE/docs/HTML/.gitignore
+      
+    - name: Debug list files
+      run: ls -la $GITHUB_WORKSPACE/docs/HTML
 
     - name: Publish Docs to GH Pages
       continue-on-error: true
@@ -92,7 +95,7 @@ jobs:
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages # The branch the action should deploy to.
-        FOLDER: docs/HTML # The folder the action should deploy.
+        FOLDER: $GITHUB_WORKSPACE/docs/HTML # The folder the action should deploy.
         CLEAN: false
         SINGLE_COMMIT: true
 
