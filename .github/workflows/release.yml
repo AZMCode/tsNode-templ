@@ -44,7 +44,8 @@ jobs:
         # The GitHub Token for this action to use. Specify secrets.GITHUB_TOKEN.
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GH_MAIL: adrianozambrana@protonmail.com
-        GH_NAME: AZMCode
+        GH_NAME: ${{ github.repository_owner }}
+        REPO: ${{ github.repository }} 
 
     - name: Parsing Package Name
       id: packageInfo
