@@ -16,6 +16,7 @@ while read -r line; do
 done <<< "$originalPaths"
 
 # Strip out .md from raw text to support Github Wiki
+find ./ -type f -exec sed -i '' -e 's/README\.md/wiki/README/g' {} \;
 find ./ -type f -exec sed -i '' -e 's/\.md//g' {} \;
 
 cd ../..
