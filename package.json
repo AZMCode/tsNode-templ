@@ -1,5 +1,5 @@
 {
-  "name": "NodeJS-TS-Package-Code-Template",
+  "name": "tsNode-templ",
   "version": "1.0.0",
   "description": "AZMMine's template for a Typescript NodeJS package",
   "main": "dist/main.js",
