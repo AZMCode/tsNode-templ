@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Tutorial: Development</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Tutorial: Development</h1>
+
+    <section>
+
+<header>
+    
+
+    <h2>Development</h2>
+</header>
+
+<article>
+    <h2 id="deps">Deps</h2>
+<p>This project utilizes bash scripts and Yarn for helper scripts</p>
+<h2 id="installation">Installation</h2>
+<p>Clone this repo to your machine, run <code>yarn install</code> to install all dependencies, and whenever you want to run and test your code, you can run <code>yarn build:code</code>.</p>
+<h2 id="dev-tools">Dev Tools</h2>
+<h3 id="yarn-commands">Yarn commands</h3>
+<h4 id="build">Build</h4>
+<ul>
+<li>
+<p><code>yarn build:all</code>: Builds a development version of both code and documentation.</p>
+</li>
+<li>
+<p><code>yarn build:code</code>: Builds code with testing coverage</p>
+</li>
+<li>
+<p><code>yarn build:code-fast</code>: Builds code without testing coverage</p>
+</li>
+<li>
+<p><code>yarn build:code-rel</code>: Builds a release version of the code without testing (For example, without tests).</p>
+</li>
+<li>
+<p><code>yarn build:ts</code>: Runs the tsc compiler in debug config.</p>
+</li>
+<li>
+<p><code>yarn build:ts-rel</code>: Runs the tsc compiler in release config.</p>
+</li>
+<li>
+<p><code>yarn build:docs</code>: Builds the docs.</p>
+</li>
+<li>
+<p><code>yarn build:all</code>: Builds code and docs in debug mode.</p>
+</li>
+<li>
+<p><code>yarn build:all-rel</code>: Builds code and docs in release mode.</p>
+</li>
+</ul>
+<h4 id="clean">Clean</h4>
+<ul>
+<li><code>yarn clean:code</code>: Cleans the <code>dist</code> folder and deletes the <code>coverage</code> folder. Automatically run in the build:code commands.</li>
+<li><code>yarn clean:docs</code>: Cleans documentation-related folders. Automatically run in the build:docs command.</li>
+<li><code>yarn clean:all</code>: Runs both of the above commands.</li>
+<li><code>yarn purge</code>: Runs all clean commands and deletes node_modules, essentially reverting the repository to a recently checked-out state.</li>
+</ul>
+<h4 id="watch">Watch</h4>
+<ul>
+<li><code>yarn watch:builder</code>: Continually builds the project</li>
+<li><code>yarn watch:debug</code>: Continually rebuilds the project and starts it with --inspect</li>
+<li><code>yarn watch:debug-brk</code>: Continually rebuilds the project and starts it with --inspect-brk</li>
+<li><code>yarn watch:docs</code>: Continually builds the docs, starts a livereload server to automatically update your browser, and an http-server instance to view the docs through.</li>
+</ul>
+<h4 id="start">Start</h4>
+<ul>
+<li><code>yarn start</code>: Starts the project</li>
+<li><code>yarn debug</code>: Starts the project with the --inspect flag.</li>
+<li><code>yarn debug-brk</code>: Starts the project with the --inspect flag.</li>
+<li><code>yarn lint</code>: Lints the project.</li>
+<li><code>yarn bStart</code>: Builds, then starts the project.</li>
+</ul>
+<h3 id="folder-structure">Folder Structure</h3>
+<pre class="prettyprint source"><code>Root
+├── devScripts
+│   ├── cleanDir.sh        Helps with directory cleaning
+│   └── watchDocs.sh       Allows for livereload, nodemon and http-server to run concurrently
+├── dist                   Code Build Folder. Intentionally Empty.
+├── docs
+│   ├── HTML               Documentation Build Folder. Intentionally empty.
+│   ├── Source             Various Source files used in Doc Building
+│   │   ├── README.md      Index Page for the Docs
+│   │   └── tutorials      Folder where tutorials are stored.
+│   │       └── ...
+│   └── Static             Folder whose contents are copied to the Documentation Build Folder on Build.
+├── eslint.json            Eslint Config
+├── jest.config.json       Jest config
+├── jsdoc.json             JSDoc config
+├── LICENSE.md             License File
+├── nodemon.json           Nodemon Config
+├── package.json           Package.json, defining all scripts and other metadata.
+├── README.md              Repo README
+├── src                    Source folder for all Typescript files, .jsdoc files, and any tests.
+│   └── ...
+├── static                 Any static files needed for the project.
+├── tsconfig.json          TSC config for the Debug build
+└── tsconfig.rel.json      TSC config for the Release build
+</code></pre>
+<h3 id="ci">CI</h3>
+<p>There are two CI jobs, one run on every pull request and push, BuildAndTest, and another only run on pushes to <code>master</code>, BuildAndRelease.</p>
+<p>BuildAndTest does what it says on the Tin.</p>
+<p>BuildAndRelease Builds the documentation and deploys it to the gh-pages branch, Packages the project into an NPM package according to package.json, creates a new Release with the given Package version, and uploads the package as a tgz file, using the package name and version in a template string. This action is intended to be modified to publish to as many places as needed, or perform other future packing actions, for example node-packer.</p>
+</article>
+
+</section>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Tutorials</h3><ul><li><a href="tutorial-Development.html">Development</a></li><li><a href="tutorial-Usage.html">Usage</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.5</a>
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
