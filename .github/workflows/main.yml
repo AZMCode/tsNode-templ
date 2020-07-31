@@ -83,6 +83,9 @@ jobs:
     - name: Build
       run: cd $GITHUB_WORKSPACE && yarn run build:all-rel
       
+    - name: Remove .gitignore from Docs Dir
+      run: rm docs/HTML/.gitignore
+      
     - name: Publish Docs to GH Pages
       continue-on-error: true
       uses: crazy-max/ghaction-github-pages@v2
