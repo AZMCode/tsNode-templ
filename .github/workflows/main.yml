@@ -83,11 +83,8 @@ jobs:
     - name: Build
       run: cd $GITHUB_WORKSPACE && yarn run build:all-rel
       
-    - name: Delete .gitignore file in HTML Docs
-      run: rm $GITHUB_WORKSPACE/docs/HTML/.gitignore
-      
-    - name: Debug list files
-      run: ls -la $GITHUB_WORKSPACE/docs/HTML
+    - name: Delete .gitignore file in HTML Docs and move to temp folder
+      run: rm $GITHUB_WORKSPACE/docs/HTML/.gitignore && mkdir -p /tmp/TEMPHTTPDOCS && cp -rI think a good workaround for this would be to modify your build step so it moves the data into a folder that isn't tracked. Perhaps you could add a cp command that moves the processed index file to a build folder and then use that as your FOLDER configuration in the deploy step. You could also simplify this by adding a script to a package.json file which handles this all for you, and then just run npm run-script build in your previous step. $GITHUB_WORKSPACE/docs/HTML /tmp/TmpDocAction
 
     - name: Publish Docs to GH Pages
       continue-on-error: true
@@ -95,7 +92,7 @@ jobs:
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages # The branch the action should deploy to.
-        FOLDER: $GITHUB_WORKSPACE/docs/HTML # The folder the action should deploy.
+        FOLDER: /tmp/TmpDocAction # The folder the action should deploy.
         CLEAN: false
         SINGLE_COMMIT: true
 
