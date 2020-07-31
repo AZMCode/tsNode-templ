@@ -40,7 +40,7 @@ jobs:
       uses: Andrew-Chen-Wang/github-wiki-action@v2
       with:
         # Directory to rsync files to the wiki.
-        WIKI_DIR: $docs/Markdown
+        WIKI_DIR: $GITHUB_WORKSPACE/docs/Markdown
         # The GitHub Token for this action to use. Specify secrets.GITHUB_TOKEN.
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GH_MAIL: adrianozambrana@protonmail.com
