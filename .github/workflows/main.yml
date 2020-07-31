@@ -83,18 +83,14 @@ jobs:
     - name: Build
       run: cd $GITHUB_WORKSPACE && yarn run build:all-rel
       
-    - name: Delete .gitignore file in HTML Docs and move to temp folder
-      run: rm $GITHUB_WORKSPACE/docs/HTML/.gitignore && mkdir -p /tmp/TEMPHTTPDOCS && cp -r $GITHUB_WORKSPACE/docs/HTML $GITHUB_WORKSPACE/TmpDocAction
-
     - name: Publish Docs to GH Pages
       continue-on-error: true
-      uses: JamesIves/github-pages-deploy-action@3.5.9
+      uses: crazy-max/ghaction-github-pages@v2
       with:
+        target_branch: gh-pages
+        build_dir: docs/HTML
+      env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        BRANCH: gh-pages # The branch the action should deploy to.
-        FOLDER: TmpDocAction # The folder the action should deploy.
-        CLEAN: false
-        SINGLE_COMMIT: true
 
 
 
