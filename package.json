@@ -22,7 +22,7 @@
     "debug-brk": "node --inspect-brk dist/main.js",
     "build:ts": "tsc -p tsconfig.json",
     "build:ts-rel": "tsc -p tsconfig.rel.json",
-    "build:docs-md": "typedoc --options typedoc.md.json",
+    "build:docs-md": "typedoc --options typedoc.md.json && $INIT_CWD/devScripts/githubifyDocs.sh",
     "build:docs-html": "typedoc --options typedoc.html.json",
     "build:docs-all": "yarn run build:docs-html && yarn run build:docs-md",
     "build:code-fast": "yarn run lint && yarn run build:ts && yarn run test-fast",
