@@ -83,7 +83,8 @@ jobs:
     - name: Build
       run: cd $GITHUB_WORKSPACE && yarn run build:all-rel
       
-    - run: rm -f $GITHUB_WORKSPACE/docs/HTML/.gitignore
+    - name: Delete .gitignore file in HTML Docs
+      run: rm $GITHUB_WORKSPACE/docs/HTML/.gitignore
 
     - name: Publish Docs to GH Pages
       continue-on-error: true
