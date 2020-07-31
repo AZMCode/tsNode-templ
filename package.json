@@ -27,7 +27,7 @@
     "build:docs-all": "yarn run build:docs-html && yarn run build:docs-md",
     "build:code-fast": "yarn run lint && yarn run build:ts && yarn run test-fast",
     "build:code": "yarn run lint && yarn run build:ts && yarn run test",
-    "build:code-rel": "yarn run clean && yarn run lint && yarn run build:ts-rel && yarn run test",
+    "build:code-rel": "yarn run clean && yarn run lint && yarn run build:ts-rel",
     "build:all": "yarn run build:code && yarn run build:docs-all",
     "build:all-rel": "yarn run build:code-rel && yarn run build:docs-all",
     "bStart": "yarn run build-all && yarn run start"
